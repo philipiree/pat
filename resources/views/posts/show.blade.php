@@ -45,14 +45,18 @@
     </div>
     @endif
     @if(Auth::user()->id == $posts->user_id)
-    <div class="text-left">
-    <a href="/posts/{{$posts->id}}/edit" class="btn btn-success">Edit</a>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/posts/{{$posts->id}}/edit" class="btn btn-success float-right">Edit</a>
+            </div>
+        <div class="col-md-6">
+            {!! Form::open(['action' => ['PostsController@destroy', $posts->id], 'method' => 'POST', 'class' => ''])!!}
+            {!! Form::hidden('_method', 'DELETE') !!}
+            {!! Form::submit('DELETE', ['class' => 'btn btn-danger']) !!}
+        {!! Form::close() !!}
+        </div>
+        </div>
 
-    {!! Form::open(['action' => ['PostsController@destroy', $posts->id], 'method' => 'POST', 'class' => 'float-right'])!!}
-        {!! Form::hidden('_method', 'DELETE') !!}
-        {!! Form::submit('DELETE', ['class' => 'btn btn-danger']) !!}
-    {!! Form::close() !!}
-    </div>
     @endif
     @endif
     @endsection
